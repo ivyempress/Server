@@ -34,10 +34,7 @@ public class Komunikacija {
     
     
     
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Komunikacija k = new Komunikacija();
-        k.pokreniServer();
-    }
+
     
     
     
