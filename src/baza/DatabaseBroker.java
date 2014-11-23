@@ -46,7 +46,7 @@ public class DatabaseBroker {
 
     public void otvoriKonekciju() throws RuntimeException {
         try {
-            connection = DriverManager.getConnection("jdbc:odbc:FitnessCentar", "", "");
+            connection = DriverManager.getConnection("jdbc:odbc:IvanaSeminarski", "", "");
             connection.setAutoCommit(false); //zahteva elksplicitnu potvrdu transakcije
         } catch (Exception ex) {
             throw new RuntimeException("Neuspesno otvaranje konekcije!");
