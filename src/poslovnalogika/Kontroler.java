@@ -160,7 +160,6 @@ public class Kontroler {
         return vso.getLista();
         
     }
-
    
     public List<OpstiDomenskiObjekat> vratiSveGradove() {
         VratiSveGradoveSO vso = new VratiSveGradoveSO();
