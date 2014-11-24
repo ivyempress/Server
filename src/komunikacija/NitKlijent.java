@@ -57,6 +57,15 @@ public class NitKlijent extends Thread {
                         else toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
                         break;
                             
+                         case   Konstante.VRATI_SVE_GRADOVE:
+                        System.out.println("O:" + Konstante.VRATI_SVE_GRADOVE);
+                        List<OpstiDomenskiObjekat> lg = Kontroler.vratiObjekat().vratiSveGradove();
+                        toOdogovor.setRezultat(lg);
+                        
+                        if (lg.size()== 0) toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
+                        else toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+                        break;
+                            
                         
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
