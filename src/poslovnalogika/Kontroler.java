@@ -153,7 +153,8 @@ public class Kontroler {
 //    }
 //
 //    
-
+    
+    
     public List<OpstiDomenskiObjekat> vratiSveOrganizacije() {
         VratiSveOrganizacijeSO vso = new VratiSveOrganizacijeSO();
         vso.izvrsiOperaciju(new Organizacija());
