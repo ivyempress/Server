@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package poslovnalogika.so;
 
 import baza.DatabaseBroker;
 
 /**
  *
- * @author student1
+ * @author Ivana
  */
 public abstract class OpstaSO {
+
     public final synchronized void izvrsiOperaciju(Object obj) throws RuntimeException {
         try {
             DatabaseBroker.getInstance().ucitajDriver();
@@ -28,12 +28,9 @@ public abstract class OpstaSO {
             DatabaseBroker.getInstance().zatvoriKonekciju();
         }
     }
-    
-    // Specificno za svaku SO
 
-    protected  void proveriPreduslov(Object obj) throws RuntimeException{
-        
-    }
+    // Specificno za svaku SO
+    protected abstract void proveriPreduslov(Object obj) throws RuntimeException;
 
     protected abstract void izvrsiKonkretnuOperaciju(Object obj) throws RuntimeException;
 }

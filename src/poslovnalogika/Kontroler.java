@@ -9,6 +9,7 @@ package poslovnalogika;
 import baza.DatabaseBroker;
 
 import domen.OpstiDomenskiObjekat;
+import domen.Organizacija;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
 
 
 
@@ -149,6 +151,13 @@ public class Kontroler {
 //    }
 //
 //    
+
+    public List<OpstiDomenskiObjekat> vratiSveOrganizacije() {
+        VratiSveOrganizacijeSO vso = new VratiSveOrganizacijeSO();
+        vso.izvrsiOperaciju(new Organizacija());
+        return vso.getLista();
+        
+    }
 
    
     

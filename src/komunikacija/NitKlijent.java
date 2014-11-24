@@ -6,12 +6,16 @@
 package komunikacija;
 
 
+import domen.OpstiDomenskiObjekat;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import poslovnalogika.Kontroler;
 import transfer.TransferObjekatOdgovor;
+import transfer.TransferObjekatZahtev;
+import util.Konstante;
 
 
 /**
@@ -30,20 +34,30 @@ public class NitKlijent extends Thread {
     @Override
     public void run() {
         try {
-//            izvrsenjeOperacija();
+           izvrsenjeOperacija();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         System.out.println("Nit je zavrsila sa radom!");
     }
 
-//    public void izvrsenjeOperacija() throws IOException, ClassNotFoundException {
-//        while (!kraj) {
-//            ObjectInputStream inSocket = new ObjectInputStream(socket.getInputStream());
-//            TransferObjekatZahtev toZahtev = (TransferObjekatZahtev) inSocket.readObject();
-//            TransferObjekatOdgovor toOdogovor = new TransferObjekatOdgovor();
-//            try {
-//                switch (toZahtev.getOperacija()) {
+    public void izvrsenjeOperacija() throws IOException, ClassNotFoundException {
+        while (!kraj) {
+            ObjectInputStream inSocket = new ObjectInputStream(socket.getInputStream());
+            TransferObjekatZahtev toZahtev = (TransferObjekatZahtev) inSocket.readObject();
+            TransferObjekatOdgovor toOdogovor = new TransferObjekatOdgovor();
+            try {
+                switch (toZahtev.getOperacija()) {
+                    case   Konstante.VRATI_SVE_ORGANIZACIJE:
+                        System.out.println("O:" + Konstante.VRATI_SVE_ORGANIZACIJE);
+                        List<OpstiDomenskiObjekat> lo = Kontroler.vratiObjekat().vratiSveOrganizacije();
+                        toOdogovor.setRezultat(lo);
+                        
+                        if (lo.size()== 0) toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
+                        else toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+                        break;
+                            
+                        
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
 //                        int sifra = Kontroler.vratiObjekat().kreirajSifru();
@@ -175,15 +189,15 @@ public class NitKlijent extends Thread {
 //                        Kontroler.vratiObjekat().stornirajRacun(rac);
 //                        toOdogovor.setRezultat(Konstante.OK);
 //                        break;
-//                    
-//                }
-//            } catch (Exception ex) {
-//                toOdogovor.setIzuzetak(ex);
-//                toOdogovor.setRezultat(ex.getMessage());
-//            }
-//            posaljiOdgovor(toOdogovor);
-//        }
-//    }
+                    
+                }
+            } catch (Exception ex) {
+                toOdogovor.setIzuzetak(ex);
+                toOdogovor.setRezultat(ex.getMessage());
+            }
+            posaljiOdgovor(toOdogovor);
+        }
+    }
 
     private void posaljiOdgovor(TransferObjekatOdgovor toOdogovor) throws IOException {
         ObjectOutputStream outSocket = new ObjectOutputStream(socket.getOutputStream());
