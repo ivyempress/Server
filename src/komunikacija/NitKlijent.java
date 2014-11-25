@@ -5,7 +5,6 @@
  */
 package komunikacija;
 
-
 import domen.OpstiDomenskiObjekat;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,7 +15,6 @@ import poslovnalogika.Kontroler;
 import transfer.TransferObjekatOdgovor;
 import transfer.TransferObjekatZahtev;
 import util.Konstante;
-
 
 /**
  *
@@ -34,7 +32,7 @@ public class NitKlijent extends Thread {
     @Override
     public void run() {
         try {
-           izvrsenjeOperacija();
+            izvrsenjeOperacija();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -48,25 +46,40 @@ public class NitKlijent extends Thread {
             TransferObjekatOdgovor toOdogovor = new TransferObjekatOdgovor();
             try {
                 switch (toZahtev.getOperacija()) {
-                    case   Konstante.VRATI_SVE_ORGANIZACIJE:
+                    case Konstante.VRATI_SVE_ORGANIZACIJE:
                         System.out.println("O:" + Konstante.VRATI_SVE_ORGANIZACIJE);
                         List<OpstiDomenskiObjekat> lo = Kontroler.vratiObjekat().vratiSveOrganizacije();
                         toOdogovor.setRezultat(lo);
-                        
-                        if (lo.size()== 0) toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
-                        else toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+
+                        if (lo.size() == 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+                        }
                         break;
-                            
-                         case   Konstante.VRATI_SVE_GRADOVE:
+
+                    case Konstante.VRATI_SVE_GRADOVE:
                         System.out.println("O:" + Konstante.VRATI_SVE_GRADOVE);
                         List<OpstiDomenskiObjekat> lg = Kontroler.vratiObjekat().vratiSveGradove();
                         toOdogovor.setRezultat(lg);
-                        
-                        if (lg.size()== 0) toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
-                        else toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+
+                        if (lg.size() == 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+                        }
                         break;
-                            
-                        
+                    case Konstante.PRETRAZI_ORGANIZACIJE:
+                        System.out.println("O:"+Konstante.PRETRAZI_ORGANIZACIJE);
+                        List<OpstiDomenskiObjekat> pretrazeneOrganizacije = Kontroler.vratiObjekat().pretraziOrganizacije((toZahtev.getParametar()).toString());
+                        toOdogovor.setRezultat(pretrazeneOrganizacije);
+
+                        if (pretrazeneOrganizacije.size() == 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+                        }
+                        break;
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
 //                        int sifra = Kontroler.vratiObjekat().kreirajSifru();
@@ -198,7 +211,6 @@ public class NitKlijent extends Thread {
 //                        Kontroler.vratiObjekat().stornirajRacun(rac);
 //                        toOdogovor.setRezultat(Konstante.OK);
 //                        break;
-                    
                 }
             } catch (Exception ex) {
                 toOdogovor.setIzuzetak(ex);

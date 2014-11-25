@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import poslovnalogika.so.organizacija.PretraziOrganizacijeSO;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
 
@@ -167,6 +168,12 @@ public class Kontroler {
         vso.izvrsiOperaciju(new Grad());
         return vso.getLista();
         
+    }
+
+    public List<OpstiDomenskiObjekat> pretraziOrganizacije(String uslov) {
+        PretraziOrganizacijeSO poso = new PretraziOrganizacijeSO();
+        poso.izvrsiOperaciju(new Organizacija(uslov,uslov));
+        return poso.getLista();
     }
 
    

@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  *
- * @author student1
+ * @author Ivana
  */
 public class DatabaseBroker {
 
