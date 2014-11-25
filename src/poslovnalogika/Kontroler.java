@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import poslovnalogika.so.organizacija.IzmeniOrganizacijuSO;
+import poslovnalogika.so.organizacija.ObrisiOrganizacijuSO;
 import poslovnalogika.so.organizacija.PretraziOrganizacijeSO;
 import poslovnalogika.so.organizacija.SacuvajOrganizacijuSO;
 import poslovnalogika.so.organizacija.VratiIDOrganizacije;
@@ -193,6 +194,11 @@ public class Kontroler {
     public void izmeniOrganizaciju(Organizacija org) {
         IzmeniOrganizacijuSO ioso = new IzmeniOrganizacijuSO();
         ioso.izvrsiOperaciju(org);
+    }
+
+    public void obrisiOrganizaciju(Organizacija organizacija) {
+        ObrisiOrganizacijuSO ooso = new ObrisiOrganizacijuSO();
+        ooso.izvrsiOperaciju(organizacija);
     }
 
    

@@ -103,6 +103,12 @@ public class NitKlijent extends Thread {
                         Kontroler.vratiObjekat().izmeniOrganizaciju(org);
                         toOdogovor.setOdgovor(Konstante.IZMENI_ORGANIZACIJU_OK);
                         break;
+                    case Konstante.OBRISI_ORGANIZACIJU:
+                        System.out.println("O: " + Konstante.OBRISI_ORGANIZACIJU);
+                        Organizacija organizacija = (Organizacija) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().obrisiOrganizaciju(organizacija);
+                        toOdogovor.setOdgovor(Konstante.OBRISI_ORGANIZACIJU_OK);
+                        break;
 
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);

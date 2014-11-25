@@ -162,9 +162,9 @@ public class DatabaseBroker {
         }
     }
 
-    public void obrisiObjekat(OpstiDomenskiObjekat odo) {
+    public void obrisi(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = '"+odo.vratiSifru()+"'";
+            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = "+odo.vratiSifru();
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();
