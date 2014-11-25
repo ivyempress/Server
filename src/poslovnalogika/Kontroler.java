@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import poslovnalogika.so.organizacija.PretraziOrganizacijeSO;
+import poslovnalogika.so.organizacija.SacuvajOrganizacijuSO;
+import poslovnalogika.so.organizacija.VratiIDOrganizacije;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
 
@@ -174,6 +176,17 @@ public class Kontroler {
         PretraziOrganizacijeSO poso = new PretraziOrganizacijeSO();
         poso.izvrsiOperaciju(new Organizacija(uslov,uslov));
         return poso.getLista();
+    }
+
+    public int vratiIDOrganizacije() {
+        VratiIDOrganizacije vido = new VratiIDOrganizacije();
+        vido.izvrsiOperaciju(new Organizacija());
+        return vido.getId();
+    }
+
+    public void sacuvajOrganizaciju(Organizacija o) {
+        SacuvajOrganizacijuSO so = new SacuvajOrganizacijuSO();
+        so.izvrsiOperaciju(o);
     }
 
    

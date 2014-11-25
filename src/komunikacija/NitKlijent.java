@@ -6,6 +6,7 @@
 package komunikacija;
 
 import domen.OpstiDomenskiObjekat;
+import domen.Organizacija;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -70,7 +71,7 @@ public class NitKlijent extends Thread {
                         }
                         break;
                     case Konstante.PRETRAZI_ORGANIZACIJE:
-                        System.out.println("O:"+Konstante.PRETRAZI_ORGANIZACIJE);
+                        System.out.println("O:" + Konstante.PRETRAZI_ORGANIZACIJE);
                         List<OpstiDomenskiObjekat> pretrazeneOrganizacije = Kontroler.vratiObjekat().pretraziOrganizacije((toZahtev.getParametar()).toString());
                         toOdogovor.setRezultat(pretrazeneOrganizacije);
 
@@ -80,6 +81,23 @@ public class NitKlijent extends Thread {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
                         }
                         break;
+                    case Konstante.VRATI_ID_ORGANIZACIJE:
+                        System.out.println("O:" + Konstante.VRATI_ORGANIZACIJE_OK);
+                        int organizacijaID = Kontroler.vratiObjekat().vratiIDOrganizacije();
+                        toOdogovor.setRezultat(organizacijaID);
+                        if (organizacijaID <= 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+                        }
+                        break;
+                    case Konstante.SACUVAJ_ORGANIZACIJU:
+                        System.out.println("O: " + Konstante.SACUVAJ_ORGANIZACIJU);
+                        Organizacija o = (Organizacija) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().sacuvajOrganizaciju(o);
+                        toOdogovor.setOdgovor(Konstante.SACUVAJ_ORGANIZACIJU_OK);
+                        break;
+
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
 //                        int sifra = Kontroler.vratiObjekat().kreirajSifru();
