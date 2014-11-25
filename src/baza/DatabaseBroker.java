@@ -79,7 +79,7 @@ public class DatabaseBroker {
 
     public int kreirajSifru(OpstiDomenskiObjekat odo) {
          try {
-            String sql = "SELECT MAX("+odo.vratiNazivKolone()+") AS Sifra FROM "+odo.vratiNazivTabele();
+            String sql = "SELECT MAX("+odo.vratiNazivKolonePrimarnogKljuca()+") AS Sifra FROM "+odo.vratiNazivTabele();
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
             int sifra = 0;
@@ -99,7 +99,7 @@ public class DatabaseBroker {
 
     public void sacuvaj(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "INSERT INTO " + odo.vratiNazivTabele() + " VALUES (" + odo.vratiInsert() + ")";
+            String sql = "INSERT INTO " + odo.vratiNazivTabele() + " VALUES (" + odo.vratiParametreZaInsert() + ")";
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             sqlNaredba.executeUpdate(sql);
@@ -151,7 +151,7 @@ public class DatabaseBroker {
 
     public void sacuvajIzmene(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "UPDATE " + odo.vratiNazivTabele() + " SET " + odo.vratiInsert2() + " WHERE "+odo.vratiNazivKolone()+" = '"+odo.vratiSifru()+"'";
+            String sql = "UPDATE " + odo.vratiNazivTabele() + " SET " + odo.vratiParametreZaUpdate() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = "+odo.vratiSifru();
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();
@@ -164,7 +164,7 @@ public class DatabaseBroker {
 
     public void obrisiObjekat(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE "+odo.vratiNazivKolone()+" = '"+odo.vratiSifru()+"'";
+            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = '"+odo.vratiSifru()+"'";
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();

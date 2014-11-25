@@ -97,6 +97,12 @@ public class NitKlijent extends Thread {
                         Kontroler.vratiObjekat().sacuvajOrganizaciju(o);
                         toOdogovor.setOdgovor(Konstante.SACUVAJ_ORGANIZACIJU_OK);
                         break;
+                    case Konstante.IZMENI_ORGANIZACIJU:
+                        System.out.println("O: " + Konstante.IZMENI_ORGANIZACIJU);
+                        Organizacija org = (Organizacija) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().izmeniOrganizaciju(org);
+                        toOdogovor.setOdgovor(Konstante.IZMENI_ORGANIZACIJU_OK);
+                        break;
 
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
