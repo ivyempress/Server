@@ -7,6 +7,7 @@ package komunikacija;
 
 import domen.OpstiDomenskiObjekat;
 import domen.Organizacija;
+import domen.Zivotinja;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -53,9 +54,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(lo);
 
                         if (lo.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
                         }
                         break;
 
@@ -65,9 +66,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(lg);
 
                         if (lg.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
                         }
                         break;
                     case Konstante.PRETRAZI_ORGANIZACIJE:
@@ -76,9 +77,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(pretrazeneOrganizacije);
 
                         if (pretrazeneOrganizacije.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
                         }
                         break;
                     case Konstante.VRATI_ID_ORGANIZACIJE:
@@ -86,9 +87,9 @@ public class NitKlijent extends Thread {
                         int organizacijaID = Kontroler.vratiObjekat().vratiIDOrganizacije();
                         toOdogovor.setRezultat(organizacijaID);
                         if (organizacijaID <= 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
                         }
                         break;
                     case Konstante.SACUVAJ_ORGANIZACIJU:
@@ -109,7 +110,24 @@ public class NitKlijent extends Thread {
                         Kontroler.vratiObjekat().obrisiOrganizaciju(organizacija);
                         toOdogovor.setOdgovor(Konstante.OBRISI_ORGANIZACIJU_OK);
                         break;
-
+                        case Konstante.VRATI_ID_ZIVOTINJE:
+                        System.out.println("O:" + Konstante.VRATI_ZIVOTINJE_OK);
+                        int zivotinjaID = Kontroler.vratiObjekat().vratiIDZivotinje();
+                        toOdogovor.setRezultat(zivotinjaID);
+                        if (zivotinjaID <= 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                        }
+                        break;
+                            
+                        case Konstante.SACUVAJ_ZIVOTINJU:
+                        System.out.println("O: " + Konstante.SACUVAJ_ZIVOTINJU);
+                        Zivotinja z = (Zivotinja) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().sacuvajZivotinju(z);
+                        toOdogovor.setOdgovor(Konstante.SACUVAJ_ZIVOTINJU_OK);
+                        break;
+                            
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
 //                        int sifra = Kontroler.vratiObjekat().kreirajSifru();

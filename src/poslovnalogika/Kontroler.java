@@ -11,6 +11,7 @@ import domen.Grad;
 
 import domen.OpstiDomenskiObjekat;
 import domen.Organizacija;
+import domen.Zivotinja;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,6 +26,8 @@ import poslovnalogika.so.organizacija.SacuvajOrganizacijuSO;
 import poslovnalogika.so.organizacija.VratiIDOrganizacije;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
+import poslovnalogika.so.zivotinja.SacuvajZivotinjuSO;
+import poslovnalogika.so.zivotinja.VratiIDZivotinjeSO;
 
 
 
@@ -201,6 +204,16 @@ public class Kontroler {
         ooso.izvrsiOperaciju(organizacija);
     }
 
+    public int vratiIDZivotinje() {
+        VratiIDZivotinjeSO vidz = new VratiIDZivotinjeSO();
+        vidz.izvrsiOperaciju(new Zivotinja());
+        return vidz.getId();
+    }
+
+        public void sacuvajZivotinju(Zivotinja z) {
+            SacuvajZivotinjuSO so = new SacuvajZivotinjuSO();
+        so.izvrsiOperaciju(z);
+    }
    
     
 }
