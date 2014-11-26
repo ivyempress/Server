@@ -7,6 +7,7 @@
 package poslovnalogika;
 
 import baza.DatabaseBroker;
+import domen.Clan;
 import domen.Grad;
 
 import domen.OpstiDomenskiObjekat;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import poslovnalogika.so.clan.SacuvajClanaSO;
 import poslovnalogika.so.organizacija.IzmeniOrganizacijuSO;
 import poslovnalogika.so.organizacija.ObrisiOrganizacijuSO;
 import poslovnalogika.so.organizacija.PretraziOrganizacijeSO;
@@ -220,6 +222,11 @@ public class Kontroler {
         VratiSveZivotinjeSO vszso = new VratiSveZivotinjeSO();
         vszso.izvrsiOperaciju(new Zivotinja());
         return vszso.getLista();
+    }
+
+    public void sacuvajClana(Clan c) {
+        SacuvajClanaSO sacuvajClanaSO = new SacuvajClanaSO();
+        sacuvajClanaSO.izvrsiOperaciju(c);
     }
    
     

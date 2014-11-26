@@ -5,6 +5,7 @@
  */
 package komunikacija;
 
+import domen.Clan;
 import domen.OpstiDomenskiObjekat;
 import domen.Organizacija;
 import domen.Zivotinja;
@@ -136,6 +137,12 @@ public class NitKlijent extends Thread {
                         } else {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ZIVOTINJA);
                         }
+                        break;
+                    case Konstante.SACUVAJ_CLANA:
+                        System.out.println("O: " + Konstante.SACUVAJ_CLANA);
+                        Clan c = (Clan) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().sacuvajClana(c);
+                        toOdogovor.setOdgovor(Konstante.SACUVAJ_CLANA_OK);
                         break;
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
