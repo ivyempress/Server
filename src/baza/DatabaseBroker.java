@@ -5,7 +5,6 @@
  */
 package baza;
 
-
 import domen.OpstiDomenskiObjekat;
 
 import java.sql.Connection;
@@ -16,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-
 /**
  *
  * @author Ivana
@@ -25,10 +23,10 @@ public class DatabaseBroker {
 
     private Connection connection;
     private static DatabaseBroker instance;
-    
+
     private DatabaseBroker() {
     }
-    
+
     public static DatabaseBroker getInstance() {
         if (instance == null) {
             instance = new DatabaseBroker();
@@ -38,7 +36,7 @@ public class DatabaseBroker {
 
     public void ucitajDriver() throws RuntimeException {
         try {
-           Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
         } catch (Exception ex) {
             throw new RuntimeException("Driver nije pronadjen!");
         }
@@ -78,13 +76,18 @@ public class DatabaseBroker {
     }
 
     public int kreirajSifru(OpstiDomenskiObjekat odo) {
-         try {
-            String sql = "SELECT MAX("+odo.vratiNazivKolonePrimarnogKljuca()+") AS Sifra FROM "+odo.vratiNazivTabele();
+        try {
+            String sql = "SELECT MAX(" + odo.vratiNazivKolonePrimarnogKljuca() + ") AS Sifra FROM " + odo.vratiNazivTabele();
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
             int sifra = 0;
             if (rs.next()) {
-                sifra= Integer.parseInt(rs.getString("Sifra"));
+                try {
+                    sifra = Integer.parseInt(rs.getString("Sifra"));
+                } catch (Exception e) {
+                    System.out.println("Prvi unos u bazu");
+                }
+
             }
             sifra++;
             rs.close();
@@ -94,7 +97,7 @@ public class DatabaseBroker {
             ex.printStackTrace();
             throw new RuntimeException("Neuspesno generisanje sifre racuna!");
         }
-        
+
     }
 
     public void sacuvaj(OpstiDomenskiObjekat odo) {
@@ -112,7 +115,7 @@ public class DatabaseBroker {
 
     public List<OpstiDomenskiObjekat> vratiListu(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "SELECT * FROM " + odo.vratiNazivTabele()+odo.uslov3();
+            String sql = "SELECT * FROM " + odo.vratiNazivTabele() + odo.uslov3();
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
@@ -125,7 +128,7 @@ public class DatabaseBroker {
 
     public List<OpstiDomenskiObjekat> pronadjiListu(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "SELECT * FROM " + odo.vratiNazivTabele()+odo.uslov();
+            String sql = "SELECT * FROM " + odo.vratiNazivTabele() + odo.uslov();
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
@@ -137,8 +140,8 @@ public class DatabaseBroker {
     }
 
     public OpstiDomenskiObjekat vratiObjekat(OpstiDomenskiObjekat odo) {
-         try {
-            String sql = "SELECT * FROM " + odo.vratiNazivTabele()+odo.uslov2();
+        try {
+            String sql = "SELECT * FROM " + odo.vratiNazivTabele() + odo.uslov2();
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
@@ -151,7 +154,7 @@ public class DatabaseBroker {
 
     public void sacuvajIzmene(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "UPDATE " + odo.vratiNazivTabele() + " SET " + odo.vratiParametreZaUpdate() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = "+odo.vratiSifru();
+            String sql = "UPDATE " + odo.vratiNazivTabele() + " SET " + odo.vratiParametreZaUpdate() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();
@@ -164,7 +167,7 @@ public class DatabaseBroker {
 
     public void obrisi(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE "+odo.vratiNazivKolonePrimarnogKljuca()+" = "+odo.vratiSifru();
+            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();
@@ -174,8 +177,5 @@ public class DatabaseBroker {
             throw new RuntimeException("Neuspesno cuvanje izmena");
         }
     }
-    
-
-   
 
 }
