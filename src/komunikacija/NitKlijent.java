@@ -54,7 +54,7 @@ public class NitKlijent extends Thread {
                         List<OpstiDomenskiObjekat> lo = Kontroler.vratiObjekat().vratiSveOrganizacije();
                         toOdogovor.setRezultat(lo);
 
-                        if (lo.size() == 0) {
+                        if (lo.isEmpty()) {
                             toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
                         } else {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
@@ -66,7 +66,7 @@ public class NitKlijent extends Thread {
                         List<OpstiDomenskiObjekat> lg = Kontroler.vratiObjekat().vratiSveGradove();
                         toOdogovor.setRezultat(lg);
 
-                        if (lg.size() == 0) {
+                        if (lg.isEmpty()) {
                             toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
                         } else {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
@@ -77,7 +77,7 @@ public class NitKlijent extends Thread {
                         List<OpstiDomenskiObjekat> pretrazeneOrganizacije = Kontroler.vratiObjekat().pretraziOrganizacije((toZahtev.getParametar()).toString());
                         toOdogovor.setRezultat(pretrazeneOrganizacije);
 
-                        if (pretrazeneOrganizacije.size() == 0) {
+                        if (pretrazeneOrganizacije.isEmpty()) {
                             toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
                         } else {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
@@ -132,7 +132,7 @@ public class NitKlijent extends Thread {
                         List<OpstiDomenskiObjekat> listaZivotinja = Kontroler.vratiObjekat().vratiSveZivotinje();
                         toOdogovor.setRezultat(listaZivotinja);
 
-                        if (listaZivotinja.size() == 0) {
+                        if (listaZivotinja.isEmpty()) {
                             toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ZIVOTINJA);
                         } else {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ZIVOTINJA);
@@ -143,6 +143,45 @@ public class NitKlijent extends Thread {
                         Clan c = (Clan) toZahtev.getParametar();
                         Kontroler.vratiObjekat().sacuvajClana(c);
                         toOdogovor.setOdgovor(Konstante.SACUVAJ_CLANA_OK);
+                        break;
+                    case Konstante.VRATI_SVE_CLANOVE:
+                        System.out.println("O:" + Konstante.VRATI_SVE_CLANOVE);
+                        List<OpstiDomenskiObjekat> listaClanova = Kontroler.vratiObjekat().vratiSveClanove();
+                        toOdogovor.setRezultat(listaClanova);
+
+                        if (listaClanova.isEmpty()) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_CLANOVA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_CLANOVA);
+                        }
+                        break;
+                    case Konstante.VRATI_SVE_LJUBIMCE:
+                        System.out.println("O:" + Konstante.VRATI_SVE_LJUBIMCE);
+                        List<OpstiDomenskiObjekat> listaLjubimaca = Kontroler.vratiObjekat().vratiSveLjubimce(toZahtev.getParametar().toString());
+                        toOdogovor.setRezultat(listaLjubimaca);
+
+                        if (listaLjubimaca.isEmpty()) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_LJUBIMACA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_LJUBIMACA);
+                        }
+                        break;
+                    case Konstante.PRETRAZI_CLANOVE:
+                        System.out.println("O:" + Konstante.PRETRAZI_CLANOVE);
+                        List<OpstiDomenskiObjekat> pretrazeniClanovi = Kontroler.vratiObjekat().pretraziClanove((toZahtev.getParametar()).toString());
+                        toOdogovor.setRezultat(pretrazeniClanovi);
+
+                        if (pretrazeniClanovi.isEmpty()) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_CLANOVA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_CLANOVA);
+                        }
+                        break;
+                    case Konstante.OBRISI_CLANA:
+                        System.out.println("O: " + Konstante.OBRISI_CLANA);
+                        Clan clanZaBrisanje = (Clan) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().obrisiClana(clanZaBrisanje);
+                        toOdogovor.setOdgovor(Konstante.OBRISI_CLANA_OK);
                         break;
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);

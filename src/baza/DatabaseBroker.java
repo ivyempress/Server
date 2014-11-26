@@ -5,6 +5,7 @@
  */
 package baza;
 
+import domen.Clan;
 import domen.OpstiDomenskiObjekat;
 
 import java.sql.Connection;
@@ -128,7 +129,7 @@ public class DatabaseBroker {
 
     public List<OpstiDomenskiObjekat> pronadjiListu(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "SELECT * FROM " + odo.vratiNazivTabele() + odo.uslov();
+            String sql = "SELECT * FROM " + odo.vratiNazivTabele() + odo.uslov() + odo.uslov3();
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             ResultSet rs = sqlNaredba.executeQuery(sql);
@@ -167,7 +168,12 @@ public class DatabaseBroker {
 
     public void obrisi(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "DELETE FROM " + odo.vratiNazivTabele() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
+            String sql = "";
+            if (odo instanceof Clan) {
+                sql = "DELETE FROM " + odo.vratiNazivTabeleZaBrisanje() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + "'" + odo.vratiSifru() + "'";
+            } else {
+                sql = "DELETE FROM " + odo.vratiNazivTabeleZaBrisanje() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
+            }
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
             sqlNaredba.executeUpdate();
