@@ -120,7 +120,6 @@ public class NitKlijent extends Thread {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA);
                         }
                         break;
-                            
                         case Konstante.SACUVAJ_ZIVOTINJU:
                         System.out.println("O: " + Konstante.SACUVAJ_ZIVOTINJU);
                         Zivotinja z = (Zivotinja) toZahtev.getParametar();
