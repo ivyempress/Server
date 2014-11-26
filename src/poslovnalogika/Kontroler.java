@@ -28,6 +28,7 @@ import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
 import poslovnalogika.so.zivotinja.SacuvajZivotinjuSO;
 import poslovnalogika.so.zivotinja.VratiIDZivotinjeSO;
+import poslovnalogika.so.zivotinja.VratiSveZivotinjeSO;
 
 
 
@@ -213,6 +214,12 @@ public class Kontroler {
         public void sacuvajZivotinju(Zivotinja z) {
             SacuvajZivotinjuSO so = new SacuvajZivotinjuSO();
         so.izvrsiOperaciju(z);
+    }
+
+    public List<OpstiDomenskiObjekat> vratiSveZivotinje() {
+        VratiSveZivotinjeSO vszso = new VratiSveZivotinjeSO();
+        vszso.izvrsiOperaciju(new Zivotinja());
+        return vszso.getLista();
     }
    
     

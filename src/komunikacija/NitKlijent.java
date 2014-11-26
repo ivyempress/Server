@@ -20,7 +20,7 @@ import util.Konstante;
 
 /**
  *
- * @author student1
+ * @author Ivana
  */
 public class NitKlijent extends Thread {
 
@@ -54,9 +54,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(lo);
 
                         if (lo.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
                         }
                         break;
 
@@ -66,9 +66,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(lg);
 
                         if (lg.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_GRADOVA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_GRADOVA);
                         }
                         break;
                     case Konstante.PRETRAZI_ORGANIZACIJE:
@@ -77,9 +77,9 @@ public class NitKlijent extends Thread {
                         toOdogovor.setRezultat(pretrazeneOrganizacije);
 
                         if (pretrazeneOrganizacije.size() == 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ORGANIZACIJA);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ORGANIZACIJA);
                         }
                         break;
                     case Konstante.VRATI_ID_ORGANIZACIJE:
@@ -87,9 +87,9 @@ public class NitKlijent extends Thread {
                         int organizacijaID = Kontroler.vratiObjekat().vratiIDOrganizacije();
                         toOdogovor.setRezultat(organizacijaID);
                         if (organizacijaID <= 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_ID_ORGANIZACIJE);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                            toOdogovor.setOdgovor(Konstante.OK_ID_ORGANIZACIJE);
                         }
                         break;
                     case Konstante.SACUVAJ_ORGANIZACIJU:
@@ -110,23 +110,33 @@ public class NitKlijent extends Thread {
                         Kontroler.vratiObjekat().obrisiOrganizaciju(organizacija);
                         toOdogovor.setOdgovor(Konstante.OBRISI_ORGANIZACIJU_OK);
                         break;
-                        case Konstante.VRATI_ID_ZIVOTINJE:
+                    case Konstante.VRATI_ID_ZIVOTINJE:
                         System.out.println("O:" + Konstante.VRATI_ZIVOTINJE_OK);
                         int zivotinjaID = Kontroler.vratiObjekat().vratiIDZivotinje();
                         toOdogovor.setRezultat(zivotinjaID);
                         if (zivotinjaID <= 0) {
-                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA);
+                            toOdogovor.setOdgovor(Konstante.ERROR_ID_ZIVOTINJE);
                         } else {
-                            toOdogovor.setOdgovor(Konstante.OK_LISTA);
+                            toOdogovor.setOdgovor(Konstante.OK_ID_ZIVOTINJE);
                         }
                         break;
-                        case Konstante.SACUVAJ_ZIVOTINJU:
+                    case Konstante.SACUVAJ_ZIVOTINJU:
                         System.out.println("O: " + Konstante.SACUVAJ_ZIVOTINJU);
                         Zivotinja z = (Zivotinja) toZahtev.getParametar();
                         Kontroler.vratiObjekat().sacuvajZivotinju(z);
                         toOdogovor.setOdgovor(Konstante.SACUVAJ_ZIVOTINJU_OK);
                         break;
-                            
+                    case Konstante.VRATI_SVE_ZIVOTINJE:
+                        System.out.println("O:" + Konstante.VRATI_SVE_ZIVOTINJE);
+                        List<OpstiDomenskiObjekat> listaZivotinja = Kontroler.vratiObjekat().vratiSveZivotinje();
+                        toOdogovor.setRezultat(listaZivotinja);
+
+                        if (listaZivotinja.size() == 0) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ZIVOTINJA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ZIVOTINJA);
+                        }
+                        break;
 //                    case Konstante.SIFRA_USLUGE:
 //                        System.out.println("O: " + Konstante.SIFRA_USLUGE);
 //                        int sifra = Kontroler.vratiObjekat().kreirajSifru();
