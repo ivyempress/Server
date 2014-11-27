@@ -28,6 +28,8 @@ import poslovnalogika.so.organizacija.VratiIDOrganizacije;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
 import poslovnalogika.so.zivotinja.IzmeniZivotinjuSO;
+import poslovnalogika.so.zivotinja.ObrisiZivotinjuSO;
+import poslovnalogika.so.zivotinja.PretraziZivotinjuSO;
 import poslovnalogika.so.zivotinja.SacuvajZivotinjuSO;
 import poslovnalogika.so.zivotinja.VratiIDZivotinjeSO;
 import poslovnalogika.so.zivotinja.VratiSveZivotinjeSO;
@@ -104,7 +106,18 @@ public class Kontroler {
         SacuvajZivotinjuSO so = new SacuvajZivotinjuSO();
         so.izvrsiOperaciju(z);
     }
+    
+     public List<OpstiDomenskiObjekat> pretraziZivotinje(String uslov) {
+         PretraziZivotinjuSO pzso = new PretraziZivotinjuSO();
+        pzso.izvrsiOperaciju(new Organizacija(uslov, uslov));
+        return pzso.getLista();
+    }
 
+     public void obrisiZivotinju(Zivotinja zivotinja) {
+         ObrisiZivotinjuSO ozso = new ObrisiZivotinjuSO();
+        ozso.izvrsiOperaciju(zivotinja);
+    }
+     
     public List<OpstiDomenskiObjekat> vratiSveZivotinje() {
         VratiSveZivotinjeSO vszso = new VratiSveZivotinjeSO();
         vszso.izvrsiOperaciju(new Zivotinja());

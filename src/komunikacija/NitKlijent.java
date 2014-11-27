@@ -144,6 +144,23 @@ public class NitKlijent extends Thread {
                         Kontroler.vratiObjekat().izmeniZivotinju(zz);
                         toOdogovor.setOdgovor(Konstante.IZMENI_ZIVOTINJU_OK);
                         break;
+                        case Konstante.PRETRAZI_ZIVOTINJE:
+                        System.out.println("O:" + Konstante.PRETRAZI_ZIVOTINJE);
+                        List<OpstiDomenskiObjekat> pretrazeneZivotinje = Kontroler.vratiObjekat().pretraziZivotinje((toZahtev.getParametar()).toString());
+                        toOdogovor.setRezultat(pretrazeneZivotinje);
+
+                        if (pretrazeneZivotinje.isEmpty()) {
+                            toOdogovor.setOdgovor(Konstante.ERROR_LISTA_ZIVOTINJA);
+                        } else {
+                            toOdogovor.setOdgovor(Konstante.OK_LISTA_ZIVOTINJA);
+                        }
+                        break;
+                         case Konstante.OBRISI_ZIVOTINJU:
+                        System.out.println("O: " + Konstante.OBRISI_ZIVOTINJU);
+                        Zivotinja zivotinja = (Zivotinja) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().obrisiZivotinju(zivotinja);
+                        toOdogovor.setOdgovor(Konstante.OBRISI_ZIVOTINJU_OK);
+                        break;
                     case Konstante.SACUVAJ_CLANA:
                         System.out.println("O: " + Konstante.SACUVAJ_CLANA);
                         Clan c = (Clan) toZahtev.getParametar();
