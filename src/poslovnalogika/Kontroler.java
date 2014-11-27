@@ -27,6 +27,7 @@ import poslovnalogika.so.organizacija.SacuvajOrganizacijuSO;
 import poslovnalogika.so.organizacija.VratiIDOrganizacije;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
+import poslovnalogika.so.zivotinja.IzmeniZivotinjuSO;
 import poslovnalogika.so.zivotinja.SacuvajZivotinjuSO;
 import poslovnalogika.so.zivotinja.VratiIDZivotinjeSO;
 import poslovnalogika.so.zivotinja.VratiSveZivotinjeSO;
@@ -108,6 +109,11 @@ public class Kontroler {
         VratiSveZivotinjeSO vszso = new VratiSveZivotinjeSO();
         vszso.izvrsiOperaciju(new Zivotinja());
         return vszso.getLista();
+    }
+    
+    public void izmeniZivotinju(Zivotinja zzz) {
+        IzmeniZivotinjuSO iosz = new IzmeniZivotinjuSO();
+        iosz.izvrsiOperaciju(zzz);
     }
 
     public void sacuvajClana(Clan c) {

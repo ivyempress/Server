@@ -138,6 +138,12 @@ public class NitKlijent extends Thread {
                             toOdogovor.setOdgovor(Konstante.OK_LISTA_ZIVOTINJA);
                         }
                         break;
+                    case Konstante.IZMENI_ZIVOTINJU:
+                        System.out.println("O: " + Konstante.IZMENI_ZIVOTINJU);
+                        Zivotinja zz = (Zivotinja) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().izmeniZivotinju(zz);
+                        toOdogovor.setOdgovor(Konstante.IZMENI_ZIVOTINJU_OK);
+                        break;
                     case Konstante.SACUVAJ_CLANA:
                         System.out.println("O: " + Konstante.SACUVAJ_CLANA);
                         Clan c = (Clan) toZahtev.getParametar();
