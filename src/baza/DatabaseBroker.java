@@ -103,7 +103,7 @@ public class DatabaseBroker {
 
     public void sacuvaj(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "INSERT INTO " + odo.vratiNazivTabele() + " VALUES (" + odo.vratiParametreZaInsert() + ")";
+            String sql = "INSERT INTO " + odo.vratiNazivTabeleZaInsert()+ " VALUES (" + odo.vratiParametreZaInsert() + ")";
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
             sqlNaredba.executeUpdate(sql);
