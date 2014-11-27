@@ -6,7 +6,7 @@
 package poslovnalogika.so.zivotinja;
 
 import baza.DatabaseBroker;
-import domen.Organizacija;
+
 import domen.Zivotinja;
 import poslovnalogika.so.OpstaSO;
 

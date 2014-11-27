@@ -109,7 +109,7 @@ public class Kontroler {
     
      public List<OpstiDomenskiObjekat> pretraziZivotinje(String uslov) {
          PretraziZivotinjuSO pzso = new PretraziZivotinjuSO();
-        pzso.izvrsiOperaciju(new Organizacija(uslov, uslov));
+        pzso.izvrsiOperaciju(new Zivotinja(uslov));
         return pzso.getLista();
     }
 
