@@ -103,9 +103,10 @@ public class DatabaseBroker {
 
     public void sacuvaj(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "INSERT INTO " + odo.vratiNazivTabeleZaInsert()+ " VALUES (" + odo.vratiParametreZaInsert() + ")";
+            String sql = "INSERT INTO " + odo.vratiNazivTabeleZaInsert() + " VALUES (" + odo.vratiParametreZaInsert() + ")";
             System.out.println(sql);
             Statement sqlNaredba = connection.createStatement();
+            System.out.println("" + sql);
             sqlNaredba.executeUpdate(sql);
             sqlNaredba.close();
         } catch (SQLException ex) {
@@ -155,9 +156,16 @@ public class DatabaseBroker {
 
     public void sacuvajIzmene(OpstiDomenskiObjekat odo) {
         try {
-            String sql = "UPDATE " + odo.vratiNazivTabele() + " SET " + odo.vratiParametreZaUpdate() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
+            String sql = "";
+            if (odo instanceof Clan) {
+               sql = "UPDATE " + odo.vratiNazivTabeleZaUpdate() + " SET " + odo.vratiParametreZaUpdate() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = '" + odo.vratiSifru()+"'";
+            } else {
+                sql = "UPDATE " + odo.vratiNazivTabeleZaUpdate() + " SET " + odo.vratiParametreZaUpdate() + " WHERE " + odo.vratiNazivKolonePrimarnogKljuca() + " = " + odo.vratiSifru();
+            }
+            
             System.out.println(sql);
             PreparedStatement sqlNaredba = connection.prepareStatement(sql);
+            System.out.println("" + sql);
             sqlNaredba.executeUpdate();
             sqlNaredba.close();
         } catch (SQLException ex) {

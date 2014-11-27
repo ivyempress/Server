@@ -6,6 +6,7 @@
 package komunikacija;
 
 import domen.Clan;
+import domen.Ljubimac;
 import domen.OpstiDomenskiObjekat;
 import domen.Organizacija;
 import domen.Zivotinja;
@@ -166,6 +167,18 @@ public class NitKlijent extends Thread {
                         Clan c = (Clan) toZahtev.getParametar();
                         Kontroler.vratiObjekat().sacuvajClana(c);
                         toOdogovor.setOdgovor(Konstante.SACUVAJ_CLANA_OK);
+                        break;
+                    case Konstante.IZMENI_CLANA:
+                        System.out.println("O: " + Konstante.IZMENI_CLANA);
+                        Clan clanZaIzmenu = (Clan) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().izmeniClana(clanZaIzmenu);
+                        toOdogovor.setOdgovor(Konstante.IZMENI_CLANA_OK);
+                        break;
+                    case Konstante.SACUVAJ_LJUBIMCA:
+                        System.out.println("O: " + Konstante.SACUVAJ_LJUBIMCA);
+                        Ljubimac lj = (Ljubimac) toZahtev.getParametar();
+                        Kontroler.vratiObjekat().sacuvajLjubimca(lj);
+                        toOdogovor.setOdgovor(Konstante.SACUVAJ_LJUBIMCA_OK);
                         break;
                     case Konstante.VRATI_SVE_CLANOVE:
                         System.out.println("O:" + Konstante.VRATI_SVE_CLANOVE);

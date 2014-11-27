@@ -14,6 +14,7 @@ import domen.OpstiDomenskiObjekat;
 import domen.Organizacija;
 import domen.Zivotinja;
 import java.util.List;
+import poslovnalogika.so.clan.IzmeniClanaSO;
 import poslovnalogika.so.clan.ObrisiClanaSO;
 
 import poslovnalogika.so.clan.PretraziClanoveSO;
@@ -27,6 +28,7 @@ import poslovnalogika.so.organizacija.SacuvajOrganizacijuSO;
 import poslovnalogika.so.organizacija.VratiIDOrganizacije;
 import poslovnalogika.so.organizacija.VratiSveGradoveSO;
 import poslovnalogika.so.organizacija.VratiSveOrganizacijeSO;
+import poslovnalogika.so.zivotinja.DodajLjubimcaSO;
 import poslovnalogika.so.zivotinja.IzmeniZivotinjuSO;
 import poslovnalogika.so.zivotinja.ObrisiZivotinjuSO;
 import poslovnalogika.so.zivotinja.PretraziZivotinjuSO;
@@ -155,6 +157,16 @@ public class Kontroler {
     public void obrisiClana(Clan clanZaBrisanje) {
         ObrisiClanaSO obrisiClanaSO = new ObrisiClanaSO();
         obrisiClanaSO.izvrsiOperaciju(clanZaBrisanje);
+    }
+
+    public void sacuvajLjubimca(Ljubimac lj) {
+        DodajLjubimcaSO dlso = new DodajLjubimcaSO();
+        dlso.izvrsiOperaciju(lj);
+    }
+
+    public void izmeniClana(Clan clanZaIzmenu) {
+        IzmeniClanaSO clanaSO = new IzmeniClanaSO();
+        clanaSO.izvrsiOperaciju(clanZaIzmenu);
     }
 
 }
